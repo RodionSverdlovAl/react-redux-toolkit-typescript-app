@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import PostList from './components/PostList';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { fetchPosts, fetchTodos, fetchUsers } from './store/reducers/ActionCreators';
@@ -26,12 +26,17 @@ function App() {
 
   return (
     <div className="App">
-        working....
-        {users.map(user=><h3 key={user.id}>{user.name}</h3>)}
+        <div>
+          {users.map(user=><h3 key={user.id}>{user.name}</h3>)}
+        </div>
+        
+        <div>
         {todos.map(todo => <div>
           <h3>{todo.id} {todo.title}</h3>
           <input type="checkbox" checked ={todo.complited} />
         </div>)}
+        </div>
+        
         <PostList posts={posts}/>
     </div>
   );

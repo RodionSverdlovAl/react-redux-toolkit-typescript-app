@@ -6,18 +6,25 @@ import { userSlise } from "./UserSlice";
 import { TodosSlice } from "./TodosSlice";
 import {postSlice} from "./PostSlice";
 import { IPost } from "../../models/IPost";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
 
-export const fetchUsers = () => async (dispatch: AppDispatch) =>{
-    try{
-        dispatch(userSlise.actions.usersFetching())
-        const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-        dispatch(userSlise.actions.usersFetchingSuccess(response.data));
-    }catch(e){
-        dispatch(userSlise.actions.usersFetchingError(String(e)));
+export const fetchUsers = createAsyncThunk(
+    'user/fetchAll',
+    async(_, thunkAPI) =>{
+        try{
+            const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users')
+            return response.data
+        }catch(e){
+            return thunkAPI.rejectWithValue('Не удалось загрузить пользователей')
+        }
+       
     }
-}
+)
+
+
+
 
 export const fetchTodos = () =>{
     return async function(dispatch:AppDispatch){
@@ -42,3 +49,5 @@ export const fetchPosts = () =>{
         }
     }
 }
+
+

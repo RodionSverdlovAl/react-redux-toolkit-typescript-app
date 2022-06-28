@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.App{
+    display: flex;
+}
+
+.post_item{
+    width: 300px;
+    margin: 5px;
+    border: 1px solid teal;
+}
