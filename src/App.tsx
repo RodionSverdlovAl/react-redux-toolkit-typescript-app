@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import PostList from './components/PostList';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchTodos, fetchUsers } from './store/reducers/ActionCreators';
+import { fetchPosts, fetchTodos, fetchUsers } from './store/reducers/ActionCreators';
 
 function App() {
 
   const dispatch = useAppDispatch();
   const {users, error,isLoading} = useAppSelector(state=>state.userReducer);
-  const {todos, todoError,todoIsLoading} = useAppSelector(state=>state.todoReducer)
+  const {todos, todoError,todoIsLoading} = useAppSelector(state=>state.todoReducer);
+  const {posts,postIsLoading,postError} = useAppSelector(state=>state.postReducer);
+
   useEffect(()=>{
     dispatch(fetchUsers())
     dispatch(fetchTodos())
+    dispatch(fetchPosts())
   },[])
 
-  if(isLoading || todoIsLoading){
+  if(isLoading || todoIsLoading || postIsLoading){
     return <h2>Loading ...</h2>
   }
-  if(error || todoError){
+  if(error || todoError || postError){
     return <h2>{error}</h2>
   }
 
@@ -28,6 +32,7 @@ function App() {
           <h3>{todo.id} {todo.title}</h3>
           <input type="checkbox" checked ={todo.complited} />
         </div>)}
+        <PostList posts={posts}/>
     </div>
   );
 }
