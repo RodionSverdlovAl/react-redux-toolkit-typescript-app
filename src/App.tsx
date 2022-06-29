@@ -1,26 +1,29 @@
 import React, { useEffect } from 'react';
 import './App.scss';
+import PhotosList from './components/PhotosList';
+import PostContainer from './components/PostContainer';
 import PostList from './components/PostList';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchPosts, fetchTodos, fetchUsers } from './store/reducers/ActionCreators';
+import { fetchPhotos, fetchTodos, fetchUsers } from './store/reducers/ActionCreators';
 
 function App() {
 
   const dispatch = useAppDispatch();
   const {users, error,isLoading} = useAppSelector(state=>state.userReducer);
   const {todos, todoError,todoIsLoading} = useAppSelector(state=>state.todoReducer);
-  const {posts,postIsLoading,postError} = useAppSelector(state=>state.postReducer);
+  // const {posts,postIsLoading,postError} = useAppSelector(state=>state.postReducer);
+  const {photos,photoIsLoadind,photoError} = useAppSelector(state=>state.photoReducer);
 
   useEffect(()=>{
     dispatch(fetchUsers())
     dispatch(fetchTodos())
-    dispatch(fetchPosts())
+    dispatch(fetchPhotos())
   },[])
 
-  if(isLoading || todoIsLoading || postIsLoading){
+  if(isLoading || todoIsLoading  || photoIsLoadind){
     return <h2>Loading ...</h2>
   }
-  if(error || todoError || postError){
+  if(error || todoError || photoError){
     return <h2>{error}</h2>
   }
 
@@ -37,7 +40,9 @@ function App() {
         </div>)}
         </div>
         
-        <PostList posts={posts}/>
+        {/* <PostList posts={posts}/> */}
+        <PhotosList photos={photos}/>
+        <PostContainer/>
     </div>
   );
 }

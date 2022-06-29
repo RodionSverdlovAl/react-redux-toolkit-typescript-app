@@ -1,33 +1,35 @@
-import { IPost } from "../../models/IPost";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+export const a:number=5;
 
-interface PostState {
-    posts: IPost[];
-    postIsLoading: boolean;
-    postError: string;
-}
+// import { IPost } from "../../models/IPost";
+// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState:PostState = {
-    posts: [],
-    postIsLoading: false,
-    postError: '',
-}
+// interface PostState {
+//     posts: IPost[];
+//     postIsLoading: boolean;
+//     postError: string;
+// }
 
-export const postSlice = createSlice({
-    name: 'post',
-    initialState,
-    reducers:{
-        postFetching(state){
-            state.postIsLoading = true;
-        },
-        postFetchingSuccess(state, action:PayloadAction<IPost[]>){
-            state.posts = action.payload;
-            state.postIsLoading = false;
-        },
-        postFetchingError(state, action:PayloadAction<string>){
-            state.postError = action.payload;
-        },
-    }
-})
+// const initialState:PostState = {
+//     posts: [],
+//     postIsLoading: false,
+//     postError: '',
+// }
 
-export default postSlice.reducer;
+// export const postSlice = createSlice({
+//     name: 'post',
+//     initialState,
+//     reducers:{
+//         postFetching(state){
+//             state.postIsLoading = true;
+//         },
+//         postFetchingSuccess(state, action:PayloadAction<IPost[]>){
+//             state.posts = action.payload;
+//             state.postIsLoading = false;
+//         },
+//         postFetchingError(state, action:PayloadAction<string>){
+//             state.postError = action.payload;
+//         },
+//     }
+// })
+
+// export default postSlice.reducer;
