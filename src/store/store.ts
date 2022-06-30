@@ -1,4 +1,4 @@
-import {combineReducers} from '@reduxjs/toolkit'
+import {combineReducers, getDefaultMiddleware} from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './reducers/UserSlice'
 import  todoReducer  from './reducers/TodosSlice'
@@ -11,14 +11,15 @@ const rootReducer = combineReducers({
     todoReducer,
     // postReducer,
     photoReducer,
-    [postAPI.reducerPath]: postAPI.reducer
+    [postAPI.reducerPath]: postAPI.reducer,
 })
 
 
 export const setupStore = () =>{
     return configureStore({
         reducer: rootReducer,
-        middleware:(getDefaultMiddleware)=> getDefaultMiddleware().concat(postAPI.middleware)
+        middleware:(getDefaultMiddleware)=> getDefaultMiddleware().concat(postAPI.middleware),
+        // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(imagesAPI.middleware)
     })
 }
 

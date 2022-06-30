@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
+import ImageList from './components/ImageList';
 import PhotosList from './components/PhotosList';
 import PostContainer from './components/PostContainer';
 import PostList from './components/PostList';
@@ -43,6 +44,7 @@ function App() {
         {/* <PostList posts={posts}/> */}
         <PhotosList photos={photos}/>
         <PostContainer/>
+        <ImageList/>
     </div>
   );
 }
